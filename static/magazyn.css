@@ -1,0 +1,77 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  background-color: #f0f0f0; 
+}
+
+.meds_add {
+  background-color:rgba(255, 255, 255, 0.6); 
+  padding: 20px;
+  border-radius: 10px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  width: auto; 
+  max-width: 600px; 
+}
+
+.meds_add h1 {
+  text-align: center; 
+  margin-bottom: 20px; 
+}
+
+.meds_add form {
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+}
+
+.meds_add form input {
+  width: 100%;
+}
+
+.meds_add label {
+  margin-top: 10px; 
+  font-weight: bold; 
+}
+
+.meds_add input[type="text"],
+.meds_add input[type="number"],
+.meds_add input[type="date"],
+.meds_add input[type="button"],
+.meds_add button[type="submit"] {
+  width: 100%;
+  padding: 10px; 
+  margin-top: 5px; 
+  border: 1px solid #ccc; 
+  border-radius: 5px; 
+  box-sizing: border-box; 
+}
+
+.meds_add button[type="submit"] {
+  background-color: #278c7a; 
+  color: white; 
+  font-size: 16px; 
+  margin-top: 20px; 
+  cursor: pointer; 
+}
+
+.meds_add input[type="button"][value="Wróć"] {
+  background-color: #999; 
+  color: white; 
+  margin-top: 10px; 
+}
+
+.meds_add input[type="button"][value="Wróć"]:hover,
+.meds_add button[type="submit"]:hover {
+  background-color: #1f6f57; 
+  border-color: #fff; 
+}
+

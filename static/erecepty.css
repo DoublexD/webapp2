@@ -1,0 +1,92 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: Arial, sans-serif;
+  }
+  
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+  }
+  
+  .meds-container {
+    background-color:rgba(255, 255, 255, 0.6); 
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: auto;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .meds-container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .meds-container form,
+  .meds-container table {
+    width: 100%;
+  }
+  
+  .meds-container label {
+    display: block; /* Makes label display in a block format */
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  
+  .meds-container input[type="text"],
+  .meds-container input[type="button"],
+  .meds-container button.dialog_button {
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%; /* Adjusts width to account for padding and border */
+    box-sizing: border-box;
+  }
+  
+  .meds-container button.dialog_button {
+    background-color: #278c7a;
+    color: white;
+    font-size: 16px;
+    margin-top: 20px;
+    cursor: pointer;
+    border: none; /* Removes border for buttons */
+  }
+  
+  .meds-container input[type="button"][value="Wróć"] {
+    background-color: #999;
+    color: white;
+    margin-top: 10px;
+  }
+  
+  .meds-container input[type="button"]:hover,
+  .meds-container button.dialog_button:hover {
+    background-color: #1f6f57;
+    border-color: #fff;
+    cursor: pointer;
+  }
+  
+  .meds-container table {
+    border-collapse: collapse;
+    margin-top: 20px; /* Adds space between the form and the table */
+  }
+  
+  .meds-container th,
+  .meds-container td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .meds-container th {
+    background-color: #f2f2f2;
+  }
+  

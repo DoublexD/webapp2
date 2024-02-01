@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pl">
+<!--DO DODANIA (usunąć historię recept, zostawić samą historię zamówień)-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/globals.css" />
+    <link rel="stylesheet" href="static/historia.css" />
+    <title>Historia Zamówień i Recept</title>
+</head>
+<body>
+    <div class="orders-container">
+        <div class="rectangle">
+            <h1>Historia Zamówień</h1>
+            <table id="orders_table">
+                <thead>
+                    <tr>
+                        <th>Nazwa Leku</th>
+                        <th>Ilość Tabletek</th>
+                        <th>Ilość opakowań</th>
+                        <th>Dawka</th>
+                        <th>Cena</th>
+                        <th>Data zamówienia</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for med in meds %}
+                    <tr>
+                        <td>{{ med[1] }}</td>
+                        <td>{{ med[2] }}</td>
+                        <td>{{ med[3] }}</td>
+                        <td>{{ med[4] }}</td>
+                        <td>{{ med[5] }}</td>
+                        <td>{{ med[6] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table><br>
+            <input type="button" value="Wróć" onclick="location.href='/apteka';"/>
+        </div>
+    </div>
+
+</body>
+
+</html>

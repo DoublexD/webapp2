@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logowanie</title>
+  <link rel="stylesheet" href="static/globals.css" />
+  <link rel="stylesheet" href="static/logowanie.css" />
+</head>
+
+<body>
+  <div class="logowanie-container">
+    <form action="{{ url_for('process_login') }}" method="post" class="login-form">
+      <h1>Logowanie</h1>
+      <div class="form-group">
+        <label for="login_text">ID aptekarza:</label>
+        <input type="text" id="login_text" name="login_text" required>
+      </div>
+      <div class="form-group">
+        <label for="password_text">Hasło:</label>
+        <input type="password" id="password_text" name="password_text" required>
+      </div>
+      <div class="form-group">
+        <input type="submit" value="Zaloguj się" class="login-button">
+      </div>
+      <p class="forgot-password">
+        Zapomniałeś hasła? <a href="przypomnij">Przypomnij</a>
+      </p>
+    </form>
+  </div>
+</body>
+
+</html>

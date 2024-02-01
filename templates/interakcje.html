@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="static/globals.css" />
+  <link rel="stylesheet" href="static/interakcje.css" />
+  <title>Interakcje leków</title>
+</head>
+<body>
+  <div class="meds-container">
+    <form action="{{ url_for('interakcje') }}" method="post" name="interactionsForm">
+      <div class="rectangle">
+        <h1>Interakcje</h1>
+        <label for="firstMedicine">Lek pierwszy: </label> 
+        <select name="firstMedicine" id="firstMedicine">
+          <option value="">Wybierz lek...</option>
+          {% for lek in leki %}
+          <option value="{{ lek.nazwa_leku }}">{{ lek.nazwa_leku }}</option>
+          {% endfor %}
+        </select>
+        <br>
+        <label for="secondMedicine">Lek drugi:</label>
+        <select name="secondMedicine" id="secondMedicine">
+          <option value="">Wybierz lek...</option>
+          {% for lek in leki %}
+           <option value="{{ lek.nazwa_leku }}">{{ lek.nazwa_leku }}</option>
+          {% endfor %}
+        </select>
+        <br>
+        <textarea id="interactionResult" rows="4" cols="50" readonly>{{ interaction_result }}</textarea><br>
+        <input type="submit" value="Sprawdź"><br>
+        <input type="button" value="Wróć" onclick="location.href='/apteka';"/>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

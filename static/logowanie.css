@@ -1,0 +1,98 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f0f0f0;
+}
+
+.logowanie-container {
+  background-color: rgba(255, 255, 255, 0.6);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-form {
+  width: 100%;
+}
+
+.login-form h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+  width: 96%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.login-form .login-button {
+  padding: 10px;
+  width: 100%;
+  background-color: #999;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.login-form .login-button:hover {
+  background-color: #1f6f57;
+  border-color: #fff;
+}
+
+.forgot-password {
+  text-align: center;
+}
+
+.forgot-password a {
+  color: #1f6f57;
+}
+@media (max-width: 600px) {
+  .logowanie-container {
+    padding: 10px;
+    max-width: 90%;
+  }
+
+  .form-group {
+    width: 100%; /* Make the input width responsive */
+  }
+
+  .login-form h1 {
+    font-size: 20px; /* Smaller font size for the header on smaller screens */
+  }
+
+  .login-form input[type="text"],
+  .login-form input[type="password"],
+  .login-form .login-button {
+    padding: 8px; /* Slightly smaller padding */
+    font-size: 14px; /* Smaller font size for inputs and button text */
+  }
+
+  .forgot-password {
+    font-size: 14px; /* Smaller font size for the forgot password link */
+  }
+}

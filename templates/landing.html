@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/globals.css" />
+    <link rel="stylesheet" href="static/landing.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>A.P.T.E.K.A</title>
+</head>
+
+<body>
+    <div class="landing">
+        <div class="rectangle">
+        <h1>A.P.T.E.K.A</h1>
+            <div class="container">
+                <a href="{{ url_for('stan') }}"><button class="button">Stan Leków <i class="fa fa-list"
+                            aria-hidden="true"></i></button></a>
+                <a href="{{ url_for('recepta') }}"><button class="button">E-Recepty <i class="fa fa-clipboard"
+                            aria-hidden="true"></i></button></a>
+                <a href="{{ url_for('sprzedaz') }}"><button class="button">Sprzedaż <i class="fa fa-barcode" aria-hidden="true"></i></button></a>
+
+                <a href="{{ url_for('magazyn') }}"><button class="button">Magazyn<i class="fa fa-building" aria-hidden="true"></i></button></a>
+
+                <a href="{{ url_for('interakcje') }}"><button class="button">Interakcje <i class="fa fa-heartbeat" aria-hidden="true"></i></button></a>
+
+                <a href="{{ url_for('historia') }}"><button class="button">Historia zamówień <i class="fa fa-area-chart" aria-hidden="true"></i></button></a>
+            </div>
+            <input type="button" value="Wyloguj" onclick="location.href='/';"/> 
+        </div>
+    </div>
+</body>
+
+</html>

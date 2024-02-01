@@ -1,0 +1,96 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: Arial, sans-serif;
+  }
+  
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+  }
+  
+  .meds-container {
+    background-color:rgba(255, 255, 255, 0.6); 
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: auto;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .meds-container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .meds-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .meds-container label {
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  
+  .meds-container select,
+  .meds-container textarea,
+  .meds-container input[type="button"],
+  .meds-container input[type="submit"] {
+    width: 90%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  .meds-container select:hover {
+    border-color: #278c7a; /* Zmienia kolor obramowania na kolor używany w przyciskach */
+    background-color: #e8e8e8; /* Lekkie rozjaśnienie tła dla lepszej widoczności */
+  }
+  
+  /* Dodatkowo, jeśli chcesz zmienić kolor tekstu podczas najechania */
+  .meds-container select:hover {
+    color: #14503f; /* Ciemniejszy kolor tekstu dla kontrastu */
+  }
+  
+
+  .meds-container textarea {
+    resize: none; 
+  }
+  
+  .meds-container input[type="submit"] {
+    background-color: #278c7a;
+    color: white;
+    font-size: 16px;
+    margin-top: 20px;
+    cursor: pointer;
+  }
+  
+  .meds-container input[type="button"][value="Wróć"] {
+    background-color: #999;
+    color: white;
+    margin-top: 10px;
+  }
+  
+  .meds-container input[type="button"]:hover,
+  .meds-container input[type="submit"]:hover {
+    background-color: #1f6f57;
+    border-color: #fff;
+  }
+  .rectangle
+  {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }

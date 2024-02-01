@@ -1,0 +1,106 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  background: linear-gradient(180deg, rgba(3, 76, 140, 0.85) 0%, rgba(39, 140, 122, 0.85) 100%);
+  position: relative; /* Changed to relative for better scrolling */
+  background-image: url('APTEKA_PROJEKT.png'); 
+  background-image: linear-gradient(
+    180deg,
+    rgba(3, 76, 140, 0.85) 0%,
+    rgba(39, 140, 122, 0.85) 100% 
+  ), url('APTEKA_PROJEKT.png');
+  background-size: contain; 
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+
+.landing {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 50px; /* Added padding */
+  box-sizing: border-box; /* Include padding in width/height */
+  text-align: center;
+}
+
+.rectangle {
+  background-color: rgba(255, 255, 255, 0.6); /* Increased opacity */
+  padding: 30px;
+  margin: 10px auto;
+  margin-top: 100px;
+  max-width: 1000px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Centered buttons */
+  gap: 20px; /* Added gap for spacing */
+  width: 100%; /* Ensures the container spans the full width */
+  padding: 0 20px; /* Padding on the sides */
+  box-sizing: border-box; /* Include padding in the width calculation */
+  
+}
+
+
+.container a {
+  flex: 1 1 calc(33.333% - 20px); /* Adjust flex-basis to account for 3 items per row */
+  text-decoration: none;
+  /* Make sure the margin is accounted for in the width calculation */
+  margin: 10px; /* Adjust margin to your preference */
+}
+
+.container .button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px; /* Set a fixed height */
+  font-size: 24px; /* Adjust font size as needed */
+  background-color: #1f6f57;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+  width: 100%; /* The button will fill the width of its parent <a> tag */
+}
+
+.container .button:hover {
+  transform: translateY(-5px); /* Subtle lift effect */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Shadow for lifting effect */
+}
+
+.container .button i {
+  margin-left: 10px;
+}
+.rectangle input[type="button"] {
+  padding: 10px 20px;
+  margin-top: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #999;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  width: 200px;
+  height: 50px; /* Adjust the width as needed */
+  display: block; /* To center the button in the div */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.rectangle input[type="button"]:hover {
+  background-color: #1f6f57;
+  border-color: #fff;
+}
