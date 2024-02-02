@@ -69,66 +69,63 @@ html, body {
     background-color: #f4f4f4;
   }
   
-  /* Dodatkowe style, aby poprawić wygląd ostatniego wiersza tabeli */
   .orders-container tr:last-child td {
     border-bottom: none; 
   }
   
   .orders-container input[type="button"] {
     margin-top: 20px;
-    border: none; 
-    background-color: #278c7a; 
+    border: 1px solid #ccc; 
+    background-color: #999;
     color: white;
     font-size: 1em;
     padding: 10px 20px;
     transition: background-color 0.3s; 
+    border-radius: 5px;
+    cursor: pointer;
   }
   
   .orders-container input[type="button"]:hover {
     background-color: #1f6f57;
+    border-color: #fff;
   }
   .orders-container input[type="button"]:active {
     background-color: #14503f; 
+    cursor: pointer;
   }
 
-/* Wyglad scrola */ 
 ::-webkit-scrollbar {
   width: 10px; 
 }
 
-/* Tło ścieżki przewijania */
 ::-webkit-scrollbar-track {
   background: #f0f0f0; 
   border-radius: 10px; 
 }
 
-/* Styl "kciuka" paska przewijania, czyli części, którą przeciągasz */
 ::-webkit-scrollbar-thumb {
   background: #999; 
   border-radius: 10px; 
 }
 
-/* Styl kciuka paska przewijania podczas najechania kursorem myszy */
 ::-webkit-scrollbar-thumb:hover {
   background: #1f6f57; 
 }
 
-/* Optymalizacja na telefony*/ 
 @media screen and (max-width: 768px) {
   .orders-container {
-    max-width: 600px; /* Mniejsza maksymalna szerokość dla tabletów */
+    max-width: 600px; 
   }
 
   .orders-container table {
-    border-spacing: 0 10px; /* Dodaje odstępy między wierszami dla lepszej czytelności */
+    border-spacing: 0 10px; 
   }
 
   .orders-container th, 
   .orders-container td {
-    padding: 10px; /* Mniejsze paddingi dla oszczędzania miejsca */
+    padding: 10px; 
   }
   
-  /* Możesz również chcieć zmniejszyć rozmiar tekstu dla lepszej czytelności na mniejszych ekranach */
   .orders-container h1,
   .orders-container th,
   .orders-container td {
@@ -136,34 +133,36 @@ html, body {
   }
 }
 
-/* Media query dla smartfonów */
 @media screen and (max-width: 480px) {
   .orders-container {
-    max-width: 100%; /* Kontener może rozszerzać się do pełnej szerokości ekranu */
-    padding: 10px; /* Mniejsze paddingi, aby wykorzystać więcej dostępnego miejsca */
+    max-width: 100%; 
+    padding: 10px;
+  }
+  .orders-container h1{
+    font-size: 18px;
   }
 
   .orders-container table {
-    width: auto; /* Tabela może być szersza niż ekran, co pozwala na przewijanie */
+    width: auto; 
   }
 
   .container {
-    flex-direction: column; /* Elementy w kontenerze będą ułożone w pionie */
+    flex-direction: column; 
   }
 
   .container a {
-    width: 100%; /* Każdy link rozszerza się do pełnej szerokości */
-    margin: 10px 0; /* Margines tylko góra/dół */
+    width: 100%; 
+    margin: 10px 0;
   }
 
   .container .button {
-    font-size: 18px; /* Mniejszy rozmiar czcionki dla przycisków */
-    padding: 10px; /* Mniejszy padding dla przycisków */
+    font-size: 18px; 
+    padding: 10px;
   }
   
   .rectangle input[type="button"] {
-    width: 100%; /* Przycisk 'Wyloguj' rozszerza się do pełnej szerokości */
-    margin-top: 10px; /* Mniejsza przerwa nad przyciskiem 'Wyloguj' */
+    width: 100%;
+    margin-top: 10px;
   }
 }
 

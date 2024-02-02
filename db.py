@@ -3,17 +3,12 @@ from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 
 
-# QUERY SELECT id_apteki FROM `API NFZ` WHERE id_apteki LIKE 'NFZ41241';
-
-#class YourModel(db.Model):
-#    id = db.Column(db.Integer, primary_key=True)
-#    id_apteki = db.Column(db.String(255), unique=True, nullable=False)
 
 login = 'apteka'
 password = 'aketpa'
-debugging = 'debugging' # production
-ip = '135.125.155.141' #ip here or 4.tcp.eu.ngrok.io:17440
-#ip = '192.168.1.14'
+debugging = 'debugging'
+ip = '135.125.155.141'
+
 
 is_debug = True
 
@@ -26,10 +21,9 @@ db = SQLAlchemy(app)
 def query_login(user_id):
     query = text("SELECT id_apteki FROM `API NFZ` WHERE id_apteki LIKE :user_id;")
     try:
-        # Execute the query
+
         result = db.session.execute(query, {'user_id': f'%{user_id}%'})
 
-        # Fetch the data
         data = result.fetchall()
         if(is_debug):
             print(data[0][0])
@@ -39,30 +33,29 @@ def query_login(user_id):
             return False
 
     except Exception as e:
-        # Handle exceptions
+
         print(f"Error executing query: {e}")
-        return "An error occurred"
+        return False
 
 def query_password(user_passsword):
     query = text("SELECT password FROM `API NFZ` WHERE password LIKE :user_passsword;")
     try:
-        # Execute the query
+
         result = db.session.execute(query, {'user_passsword': f'%{user_passsword}%'})
 
-        # Fetch the data
+
         data = result.fetchall()
         if(is_debug):
             print(data[0][0])
         if user_passsword == str(data[0][0]):
-            #print(data_psswrd)
+
             return True
         else:
             return False
 
     except Exception as e:
-        # Handle exceptions
         print(f"Error executing query: {e}")
-        return "An error occurred"
+        return False
     
 def query_meds():
     query = text("SELECT * FROM `leki`;")
@@ -85,7 +78,6 @@ def query_med_list():
         return "An error occurred"
     
 def query_interactions(med1, med2):
-    # Zapytanie do bazy danych o interakcje dla wybranych leków
     query = text("""
         SELECT i1.opis, i2.opis 
         FROM leki l1
@@ -97,23 +89,20 @@ def query_interactions(med1, med2):
     result = db.session.execute(query, {'med1': med1, 'med2': med2})
     interactions = result.fetchall()
 
-    # Assuming the logic that if both medicines have the same interaction_id, there's an interaction
     if interactions and interactions[0][0] == interactions[0][1]:
-        # There's an interaction, return the description
         return [interactions[0][0]]
     else:
-        # No interaction found, return empty list or a message indicating no interaction
         return ["Brak interakcji."]
     
 def query_precriptions(pesel = None, access_key = None):
     if pesel is None and access_key is None:
-        return [], False  # Return an empty list and False when both parameters are missing
+        return [], False  
     else:
         query = text("SELECT * FROM `e-recepty`.`recepty_zbiorcze` WHERE kod_dostepu LIKE :access_key AND pesel = :pesel;")
         result = db.session.execute(query, {'access_key': f'%{access_key}%', 'pesel': pesel})
         rows = result.fetchall()
-        if not rows:  # Check if the query returned any rows
-            return [], False  # Return an empty list and False if no rows were found
+        if not rows:  
+            return [], False  
 
         id_recepty_zbiorczej = [row[0] for row in rows]
         data_array = []
@@ -124,17 +113,7 @@ def query_precriptions(pesel = None, access_key = None):
             data_array.append(data)
         
         return data_array, True
-    #SELECT * FROM `recepty_zbiorcze` WHERE kod_dostepu = 1111 AND pesel = 10121230121;    
-    #query = text("SELECT * FROM `e-recepty`.`recepty_jed`;")
-    #query = text("SELECT * FROM `e-recepty`.`recepty_jed`;")
-    #try:
-    #    result = db.session.execute(query)
-    #    data = result.fetchall()
-    #    print(data)
-    #    return data
-    #except Exception as e:
-    #    print(f"Error executing query: {e}")
-    #    return "An error occurred"
+   
 
 def add_meds(nazwa_leku = None, ilosc_tabletek = None, dawka = None, ilosc_opakowan = None, waznosc = None, cena = None, substancja_czynna = None):
     query = text("SELECT MAX(`id_leku`) FROM `leki`;")
@@ -177,27 +156,23 @@ def sell_meds(leki_do_sprzedazy):
         id_leku = lek['id_leku']
         ilosc_opakowan = lek['ilosc_opakowan']
 
-        # Sprawdzenie dostępnej ilości leku w magazynie
         query = text("SELECT `Ilosc opakowan` FROM `debugging`.`leki` WHERE `id_leku` = :id_leku;")
         result = db.session.execute(query, {'id_leku': id_leku})
         lek_info = result.fetchone()
         if lek_info and lek_info[0] >= ilosc_opakowan:
-            # Aktualizacja stanu magazynowego
             new_ilosc_opakowan = lek_info[0] - ilosc_opakowan
             update_query = text("UPDATE `debugging`.`leki` SET `Ilosc opakowan` = :new_ilosc_opakowan WHERE `id_leku` = :id_leku;")
             db.session.execute(update_query, {'new_ilosc_opakowan': new_ilosc_opakowan, 'id_leku': id_leku})
 
-            # Dodanie rekordu do historii sprzedaży
             insert_query = text("""
                 INSERT INTO `debugging`.`historia_sprzedaz`
-                (`nazwa_leku`, `ilosc_opakowan`, `data_sprzedazy`) 
-                VALUES ((SELECT `nazwa_leku` FROM `leki` WHERE `id_leku` = :id_leku), :ilosc_opakowan, CURDATE());
+                (`nazwa_leku`, `ilosc_opakowan`, `cena`, `dawka`, `data_sprzedazy`) 
+                VALUES ((SELECT `nazwa_leku` FROM `leki` WHERE `id_leku` = :id_leku), :ilosc_opakowan, (SELECT `cena` FROM `leki` WHERE `id_leku` = :id_leku), (SELECT `dawka` FROM `leki` WHERE `id_leku` = :id_leku), CURDATE());
             """)
             db.session.execute(insert_query, {'id_leku': id_leku, 'ilosc_opakowan': ilosc_opakowan})
 
             db.session.commit()
         else:
-            # Obsługa błędu, gdy nie ma wystarczającej ilości leku w magazynie
             print(f"Nie można sprzedać leku o ID {id_leku} w ilości {ilosc_opakowan}. Nie wystarczająca ilość w magazynie.")
             return {"error": "Nie wystarczająca ilość w magazynie."}
 

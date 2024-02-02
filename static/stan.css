@@ -67,4 +67,27 @@ body {
     background-color: #1f6f57;
     border-color: #fff;
 }
+@media screen and (max-width: 550px) {
+    .meds-container {
+        padding: 10px;
+        max-width: 100%;
+    }
+
+    .meds-container h1 {
+        font-size: 18px; 
+    }
+
+    .meds-container table {
+        font-size: 14px; 
+    }
+
+    .meds-container th, .meds-container td {
+        padding: 5px; 
+    }
+
+    .meds-container input[type="button"] {
+        font-size: 14px; 
+        padding: 8px; 
+    }
+}
 

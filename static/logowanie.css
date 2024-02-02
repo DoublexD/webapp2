@@ -78,21 +78,21 @@ html, body {
   }
 
   .form-group {
-    width: 100%; /* Make the input width responsive */
+    width: 100%; 
   }
 
   .login-form h1 {
-    font-size: 20px; /* Smaller font size for the header on smaller screens */
+    font-size: 20px; 
   }
 
   .login-form input[type="text"],
   .login-form input[type="password"],
   .login-form .login-button {
-    padding: 8px; /* Slightly smaller padding */
-    font-size: 14px; /* Smaller font size for inputs and button text */
+    padding: 8px; 
+    font-size: 14px; 
   }
 
   .forgot-password {
-    font-size: 14px; /* Smaller font size for the forgot password link */
+    font-size: 14px; 
   }
 }

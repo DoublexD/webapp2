@@ -23,7 +23,7 @@ function zwrocDoMagazynu(id) {
     let meds_quantity = parseInt(medsTable.rows[id_l].cells[3].innerText);
     medsTable.rows[id_l].cells[3].innerText = (meds_quantity + 1).toString();
 
-    // aktualizowanie koszyka    
+    
     let cartTable = document.getElementById('tabelaKoszyk').getElementsByTagName('tbody')[0];
     for (let i = 0; i < cartTable.rows.length; i++) {
         let rowId = cartTable.rows[i].getAttribute('data-id');
@@ -48,7 +48,7 @@ function sprzedajKoszyk() {
     for (let i = 0; i < rows.length; i++) {
         const row = rows[i];
         const idLeku = row.getAttribute('data-id');
-        const ilosc = parseInt(row.cells[3].innerText); // Zakładając, że ilość jest w czwartej kolumnie
+        const ilosc = parseInt(row.cells[3].innerText); 
         lekiDoSprzedazy.push({ idLeku, ilosc });
     }
 
@@ -63,7 +63,7 @@ function sprzedajKoszyk() {
     .then(data => {
         console.log('Success:', data);
         alert('Sprzedaż zakończona sukcesem');
-        // Opcjonalnie: odśwież stronę lub usuń zawartość koszyka
+       
     })
     .catch((error) => {
         console.error('Error:', error);
@@ -83,24 +83,24 @@ function dodajDoKoszyka(id, nazwa, ilosc, dawka, ilosc_opakowan, waznosc, cena) 
 
     if (meds_quantity <= 0) {
         console.log("Brak dostępnych leków w magazynie.");
-        return; // ni ma leków kurwa w magazynie juz
+        return; 
     }
 
-    // sprawdzanie czy produkt juz koszyk i sumowanie
+    
     let isProductInCart = false;
     for (let i = 0; i < cartTable.rows.length; i++) {
         if (cartTable.rows[i].getAttribute('data-id') == id) {
             isProductInCart = true;
             let currentQty = parseInt(cartTable.rows[i].cells[3].innerText);
             cartTable.rows[i].cells[3].innerText = (currentQty + 1).toString();
-            zmniejszIloscWMagazynie(id); // zmniejszenie sztuk w magazynie 
+            zmniejszIloscWMagazynie(id); 
             break;
         }
     }
 
-    // dodawanie nowego lekuu
+
     if (!isProductInCart) {
-        zmniejszIloscWMagazynie(id); // - magazyn lek
+        zmniejszIloscWMagazynie(id); 
         let row = cartTable.insertRow();
         row.setAttribute('data-id', id); 
         row.insertCell(0).innerText = nazwa;
@@ -143,7 +143,6 @@ function sprzedajKoszyk() {
     .then(data => {
         console.log('Success:', data);
         alert('Sprzedaż zakończona sukcesem');
-        // Opcjonalnie: odśwież stronę lub usuń zawartość koszyka
     })
     .catch((error) => {
         console.error('Error:', error);

@@ -16,22 +16,20 @@
                 <thead>
                     <tr>
                         <th>Nazwa Leku</th>
-                        <th>Ilość leku (sztuki/ml)</th>
                         <th>Ilość opakowań</th>
-                        <th>Dawka</th>
                         <th>Cena</th>
-                        <th>Data zamówienia</th>
+                        <th>Dawka</th>
+                        <th>Data sprzedaży</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for med in meds %}
                     <tr>
+                        <td>{{ med[0] }}</td>
                         <td>{{ med[1] }}</td>
-                        <td>{{ med[2] }}</td>
-                        <td>{{ med[3] }}</td>
+                        <td>{{ med[2] }}zł</td>
+                        <td>{{ med[3] }}mg</td>
                         <td>{{ med[4] }}</td>
-                        <td>{{ med[5] }}</td>
-                        <td>{{ med[6] }}</td>
                     </tr>
                     {% endfor %}
                 </tbody>

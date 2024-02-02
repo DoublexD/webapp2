@@ -19,26 +19,29 @@ body {
   border-radius: 10px; 
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
   width: auto; 
-  max-width: 600px; 
+  max-width: 1000px; 
+  max-height: 600px;
   text-align: center; 
+  overflow-x:auto;
 }
 
 .meds_add h1, .meds_add h2 {
   margin-bottom: 20px; 
 }
 
-/* Adjusted selector to apply styles directly to input and button elements */
+
 .meds_add input[type="text"],
 .meds_add input[type="number"],
 .meds_add input[type="date"],
 .meds_add input[type="button"],
 .meds_add button {
-  width: 100%; /* Full width within the container */
+  width: 100%; 
   padding: 10px; 
   margin-top: 5px; 
   border: 1px solid #ccc; 
   border-radius: 5px; 
   box-sizing: border-box; 
+  cursor: pointer; 
 }
 
 .meds_add button {
@@ -60,4 +63,62 @@ body {
 .meds_add button:hover {
   background-color: #1f6f57; 
   border-color: #fff; 
+}
+.magazyn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow-x:auto;
+}
+::-webkit-scrollbar {
+  width: 10px; 
+}
+
+
+::-webkit-scrollbar-track {
+  background: #f0f0f0; 
+  border-radius: 10px; 
+}
+
+
+::-webkit-scrollbar-thumb {
+  background: #999; 
+  border-radius: 10px; 
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+  background: #1f6f57; 
+}
+.sales-container table {
+  width: 100%;
+  margin: 0 auto;
+  border-collapse: separate;
+  border-spacing: 0; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+}
+
+.sales-container th, 
+.sales-container td {
+  border-bottom: 1px solid #ccc; 
+  padding: 15px;
+  text-align: left;
+  background-color: white;
+  white-space: nowrap;
+}
+.sales-container th {
+  background-color: #e8e8e8; 
+  color: #333; 
+  font-size: 0.95em;
+}
+.sales-container tbody tr:hover {
+  background-color: #f4f4f4;
+}
+.koszyk, .magazyn {
+  height: 50%;
+  overflow-y: auto;
+  width: 100%;
+  flex: 1; 
+  margin: 10px; 
 }

@@ -36,7 +36,7 @@ html, body {
   }
   
   .meds-container label {
-    display: block; /* Makes label display in a block format */
+    display: block; 
     margin-top: 10px;
     font-weight: bold;
   }
@@ -48,7 +48,7 @@ html, body {
     margin-top: 5px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    width: 100%; /* Adjusts width to account for padding and border */
+    width: 100%;
     box-sizing: border-box;
   }
   
@@ -58,7 +58,7 @@ html, body {
     font-size: 16px;
     margin-top: 20px;
     cursor: pointer;
-    border: none; /* Removes border for buttons */
+    border: none; 
   }
   
   .meds-container input[type="button"][value="Wróć"] {
@@ -76,7 +76,7 @@ html, body {
   
   .meds-container table {
     border-collapse: collapse;
-    margin-top: 20px; /* Adds space between the form and the table */
+    margin-top: 20px; 
   }
   
   .meds-container th,

@@ -51,16 +51,9 @@ def stan():
 
 @app.route('/recepta', methods=['GET', 'POST'])
 def recepta():
-    #if request.method == 'POST':
-    #    pesel = request.form.get('pesel')
-    #    kod_dostepu = request.form.get('kod_dostepu')
-    #    if pesel != None and kod_dostepu != None:
-    #        return render_template("erecepty.html", meds=query_precriptions(pesel, kod_dostepu))
-    #else:
-    #    return render_template("erecepty.html")
+
 
     if request.method == 'POST':
-        # Extract `pesel` and `kod_dostepu` from the form
         pesel = request.form.get('pesel')
         access_key = request.form.get('kod_dostepu')
         
@@ -68,14 +61,9 @@ def recepta():
         
         return render_template('erecepty.html', meds=meds, data_found=data_found)
     else:
-        # Handle GET request or initial page load
         return render_template('erecepty.html', data_found=True)
 
-    #if request.method == 'POST':
-    #    return redirect("erecepty.html", meds=query_precriptions())
-    #if query_precriptions() == False:
-    #    return render_template("erecepty.html")
-    #else:
+
 @app.route('/magazyn', methods=['GET', 'POST'])
 def magazyn():
     if request.method == 'POST':
@@ -122,7 +110,7 @@ def sprzedaz_koszyk():
         leki_do_sprzedazy = request.get_json()
         print(leki_do_sprzedazy)
         sell_meds(leki_do_sprzedazy)
-        return jsonify({"success": True})  # Now this should work correctly
+        return jsonify({"success": True})
         
 
 @app.route('/interakcje')
@@ -135,7 +123,6 @@ def interakcje():
         med1_id = request.form.get('firstMedicine')
         med2_id = request.form.get('secondMedicine')
 
-        # Pobieranie wyniku interakcji
         interaction_messages = query_interactions(med1_id, med2_id)
         interaction_result = " ".join(interaction_messages) if interaction_messages else "Brak interakcji."
 
