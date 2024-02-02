@@ -163,7 +163,7 @@ def add_meds(nazwa_leku = None, ilosc_tabletek = None, dawka = None, ilosc_opako
 
 
 def sell_history():
-    query = text("SELECT * FROM `historia_sprzedaz`.`historia_sprzedazy_leku`;")
+    query = text("SELECT * FROM `debugging`.`historia_sprzedaz`;")
     try:
         result = db.session.execute(query)
         data = result.fetchall()
