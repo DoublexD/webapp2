@@ -1,9 +1,10 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, jsonify
 from flask import send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import text
 from werkzeug.security import generate_password_hash, check_password_hash
 from db import *
+from datetime import date
 
 @app.route('/')
 def main():
@@ -108,15 +109,21 @@ def zamowienia():
 @app.route('/sprzedaz', methods=['GET', 'POST'])
 def sprzedaz():
     if request.method == 'POST':
-        nazwa_leku = request.form.get('nazwa_leku')
-        dawka = request.form.get('dawka')
-        print("Dawka : " + dawka)
-        ilosc_opakowan = request.form.get('ilosc_opakowan')
-        print(f"Sprzedano {nazwa_leku} {dawka}  {ilosc_opakowan}.")
-        if nazwa_leku != None  and dawka != None and ilosc_opakowan != None:
-            sell_meds(nazwa_leku, dawka, ilosc_opakowan)
-            return render_template("sprzedaz.html", meds=query_meds())
-    return render_template("sprzedaz.html", meds=query_meds())
+        leki_do_sprzedazy = request.get_json()
+        print(leki_do_sprzedazy)
+        sell_meds(leki_do_sprzedazy)
+        return render_template("sprzedaz.html", meds=query_meds())
+    else:
+        return render_template("sprzedaz.html", meds=query_meds())
+
+@app.route('/sprzedaz_koszyk', methods=['GET', 'POST'])
+def sprzedaz_koszyk():
+    if request.method == 'POST':
+        leki_do_sprzedazy = request.get_json()
+        print(leki_do_sprzedazy)
+        sell_meds(leki_do_sprzedazy)
+        return jsonify({"success": True})  # Now this should work correctly
+        
 
 @app.route('/interakcje')
 def interakcje_list():
@@ -137,6 +144,9 @@ def interakcje():
     else:
         leki = query_med_list()
         return render_template("interakcje.html", leki=leki, interaction_result=interaction_messages)
+
+
+
     
 if __name__ == '__main__':
     app.run(debug=True)

@@ -22,6 +22,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql://{login}:{password}@{ip}/{debug
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
+
 def query_login(user_id):
     query = text("SELECT id_apteki FROM `API NFZ` WHERE id_apteki LIKE :user_id;")
     try:
@@ -161,39 +162,6 @@ def add_meds(nazwa_leku = None, ilosc_tabletek = None, dawka = None, ilosc_opako
     db.session.commit()
 
 
-
-
-
-def sell_meds(nazwa_leku = None, dawka = None, ilosc_opakowan = None):
-    try:
-        query = text("SELECT * FROM `leki` WHERE `nazwa_leku` LIKE :nazwa_leku AND 'dawka' LIKE :dawka;")
-        result = db.session.execute(query, {'nazwa_leku': nazwa_leku, 'dawka': f'%{dawka}%'})
-        current_stock = int(rows[0][3])
-        print("ID STOCK " + str(current_stock))
-        query = text("SELECT `id_paragonu` FROM `historia_sprzedaz`.`historia_sprzedazy_leku`")
-        result = db.session.execute(query)
-        rows = result.fetchall()
-        id_paragonu_last = int(rows[0][0])
-        print("ID PARAGONU " + str(id_paragonu_last))
-
-
-        query = text("INSERT INTO `historia_sprzedaz`.`historia_sprzedazy_leku` (`id_sprzedazy_leku`, `nazwa_leku`, `ilosc_opakowan`, `dawka_leku`, `data_sprzedazy`, `id_paragonu`) VALUES (NULL, :nazwa_leku, :ilosc_opakowan, :dawka_leku, CURDATE(), :id_paragonu);")
-        result = db.session.execute(query, {'nazwa_leku': nazwa_leku, 'dawka_leku' : dawka, 'ilosc_opakowan' : ilosc_opakowan, 'id_paragonu' : str(id_paragonu_last+1)})
-        
-
-        if current_stock < int(ilosc_opakowan):
-            raise Exception("Niewystarczająca ilość leków na stanie")
-
-        new_stock = current_stock - ilosc_opakowan
-        query = text("UPDATE `leki` SET `Ilosc_opakowan` = :new_stock WHERE `nazwa_leku` LIKE :nazwa_leku AND `dawka_leku` LIKE :dawka;")
-        db.session.execute(query, {'new_stock': new_stock, 'nazwa_leku':nazwa_leku})
-        db.session.commit()
-
-        print(f"Sprzedano {ilosc_opakowan} tabletek leku o ID {nazwa_leku}.")
-
-    except Exception as e:
-        print("Błąd podczas sprzedaży leku:", str(e))
-
 def sell_history():
     query = text("SELECT * FROM `historia_sprzedaz`.`historia_sprzedazy_leku`;")
     try:
@@ -203,3 +171,35 @@ def sell_history():
     except Exception as e:
         print(f"Error executing query: {e}")
         return "An error occurred"
+
+def sell_meds(leki_do_sprzedazy):
+    for lek in leki_do_sprzedazy:
+        id_leku = lek['id_leku']
+        ilosc_opakowan = lek['ilosc_opakowan']
+
+        # Sprawdzenie dostępnej ilości leku w magazynie
+        query = text("SELECT `Ilosc opakowan` FROM `debugging`.`leki` WHERE `id_leku` = :id_leku;")
+        result = db.session.execute(query, {'id_leku': id_leku})
+        lek_info = result.fetchone()
+        if lek_info and lek_info[0] >= ilosc_opakowan:
+            # Aktualizacja stanu magazynowego
+            new_ilosc_opakowan = lek_info[0] - ilosc_opakowan
+            update_query = text("UPDATE `debugging`.`leki` SET `Ilosc opakowan` = :new_ilosc_opakowan WHERE `id_leku` = :id_leku;")
+            db.session.execute(update_query, {'new_ilosc_opakowan': new_ilosc_opakowan, 'id_leku': id_leku})
+
+            # Dodanie rekordu do historii sprzedaży
+            insert_query = text("""
+                INSERT INTO `debugging`.`historia_sprzedaz`
+                (`nazwa_leku`, `ilosc_opakowan`, `data_sprzedazy`) 
+                VALUES ((SELECT `nazwa_leku` FROM `leki` WHERE `id_leku` = :id_leku), :ilosc_opakowan, CURDATE());
+            """)
+            db.session.execute(insert_query, {'id_leku': id_leku, 'ilosc_opakowan': ilosc_opakowan})
+
+            db.session.commit()
+        else:
+            # Obsługa błędu, gdy nie ma wystarczającej ilości leku w magazynie
+            print(f"Nie można sprzedać leku o ID {id_leku} w ilości {ilosc_opakowan}. Nie wystarczająca ilość w magazynie.")
+            return {"error": "Nie wystarczająca ilość w magazynie."}
+
+    return {"success": "Sprzedaż zakończona sukcesem."}
+    
